@@ -1,0 +1,2 @@
+# eksisozluk-go
+eksisozluk @ terminal
