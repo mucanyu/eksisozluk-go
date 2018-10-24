@@ -8,15 +8,17 @@ Komut satırından `ek$isözlük` gündemini takip etmenizi ve başlık içerisi
 
 **Go** ile geliştirildi.
 
-### Nasıl?
-
-#### -> Kullanırım
-- İndir
-
+#### Komutlar
 ```
 eksisozluk-go gundem [--limit=#] [--sayfa=#]
 eksisozluk-go baslik ramiz dayı [--limit=#] [--sayfa=#]
 ```
+
+### Nasıl?
+
+#### -> Kullanırım
+- İşletim sisteminize göre binary dosyasını [indirin](https://github.com/mucanyu/eksisozluk-go/releases/tag/v1.0).
+
 
 #### -> Derlerim
 

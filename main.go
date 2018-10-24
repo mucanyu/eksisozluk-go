@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/mucanyu/eksisozluk-go/model"
-
 	"github.com/mucanyu/eksisozluk-go/scraper"
 	"github.com/urfave/cli"
 )
@@ -127,7 +126,6 @@ SECENEKLER:
 						fmt.Println(err.Error())
 						return nil
 					}
-					// fmt.Println()
 					return nil
 				}
 			},
