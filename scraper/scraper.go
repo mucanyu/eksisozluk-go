@@ -136,6 +136,10 @@ func PrintTopic(params *model.BaslikParams) error {
 	}
 	response.Body.Close()
 
+	if params.Sukela {
+		redirectedURL += "?a=nice"
+	}
+
 	if strings.Contains(redirectedURL, "?") {
 		redirectedURL += "&p="
 	} else {

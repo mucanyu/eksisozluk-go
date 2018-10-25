@@ -32,7 +32,7 @@ $ go install
 ### Komutlar
 ```
 eksisozluk-go gundem [--limit=#] [--sayfa=#]
-eksisozluk-go baslik <BAŞLIK> [--limit=#] [--sayfa=#]
+eksisozluk-go baslik <BAŞLIK> [--sukela] [--limit=#] [--sayfa=#]
 ```
 
 ### Katkıda Bulunun

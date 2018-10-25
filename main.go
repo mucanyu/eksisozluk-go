@@ -13,6 +13,7 @@ import (
 
 var (
 	limitVal, pageVal int
+	sukelaVal         bool
 
 	version = "1.0.0"
 )
@@ -21,13 +22,11 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "eksisozluk-go"
 	app.Version = version
-	app.CustomAppHelpTemplate = `eksisozluk CLI. Built with Go.
-
-VERSIYON:
+	app.CustomAppHelpTemplate = `VERSIYON:
 			` + app.Version + `
 
 KULLANIM:
-			eksisozluk-go [gundem|baslik] komut [argumanlar...]
+			eksisozluk-go [gundem|baslik] [argumanlar...]
 
 KOMUTLAR:
 			gundem,  g	 Ekşisözlük'teki gündemleri listeler
@@ -97,14 +96,20 @@ SECENEKLER:
 					Value:       10,
 					Destination: &limitVal,
 				},
+				cli.BoolFlag{
+					Name:        "sukela",
+					Usage:       "Başlık içerisinde en beğenilen entryleri sıralar",
+					Destination: &sukelaVal,
+				},
 			},
 			CustomHelpTemplate: `BASLIK:
 		Seçtiğiniz başlığın entrylerini listeler.
 
 KULLANIM:
-		eksisozluk-go baslik BASLIK_ISMI [--sayfa=BASLIK_SAYFA_NO] [--limit=ENTRY_LIMITI]
+		eksisozluk-go baslik BASLIK_ISMI [--sukela] [--sayfa=BASLIK_SAYFA_NO] [--limit=ENTRY_LIMITI]
 
 SECENEKLER:
+	--sukela			 Başlığın en çok olumlu oy olan entrylerini sıralar (varsayılan: false)
 	--limit, -l    Listelenecek maksimum entry sayısı (varsayılan: 10)
 	--sayfa, -s    Başlık içerisindeki sayfa seçimi (varsayılan: 1)` + "\n",
 
@@ -119,7 +124,7 @@ SECENEKLER:
 
 				} else {
 					args := strings.Join(c.Args(), " ")
-					params := model.BaslikParams{Topic: args, Page: pageVal, Limit: limitVal}
+					params := model.BaslikParams{Topic: args, Page: pageVal, Limit: limitVal, Sukela: sukelaVal}
 
 					err := scraper.PrintTopic(&params)
 					if err != nil {

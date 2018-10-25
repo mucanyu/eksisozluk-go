@@ -15,8 +15,8 @@ type Entry struct {
 
 // BaslikParams fields
 type BaslikParams struct {
-	Topic     string
-	Page      int
-	Limit     int
-	PageCount int
+	Topic  string
+	Page   int
+	Limit  int
+	Sukela bool
 }
