@@ -14,6 +14,7 @@ import (
 var (
 	limitVal, pageVal int
 	sukelaVal         bool
+	kategoriVal       string
 
 	version = "1.0.0"
 )
@@ -34,7 +35,6 @@ KOMUTLAR:
 			version, v 	 Versiyon numarasını gösterir
 			help,    h	 Kullanılabilen komutları listeler ya da bir komut için yardım yazısını gösterir
 `
-
 	app.Commands = []cli.Command{
 		cli.Command{
 			Name:    "gundem",
@@ -53,14 +53,20 @@ KOMUTLAR:
 					Usage:       "Istediginiz sayfadaki populer basliklari getirir.",
 					Destination: &pageVal,
 				},
+				cli.StringFlag{
+					Name:        "kategori, k",
+					Usage:       "Belirlediğiniz kategoride gündemdeki başlıkları getirir.",
+					Destination: &kategoriVal,
+				},
 			},
 			Action: func(c *cli.Context) error {
 				if limitVal < 1 || pageVal < 1 {
 					cli.ShowCommandHelp(c, "gundem")
 					return errors.New("\nLimit veya belirtilen sayfanın değeri `1` değerinden az olmamalıdır")
 				}
+				params := model.GundemParams{Limit: limitVal, Page: pageVal, Kategori: kategoriVal}
 
-				err := scraper.PrintGundem(limitVal, pageVal)
+				err := scraper.PrintGundem(&params)
 				if err != nil {
 					return err
 				}
@@ -73,8 +79,9 @@ KULLANIM:
 		eksisozluk-go gundem [--limit=BASLIK_SAYISI] [--sayfa=GUNDEM_SAYFA_NO]
 
 SECENEKLER:
-		--limit, -l    Listelenecek maksimum başlık sayısı. (varsayılan: 20)` + `
-		--sayfa, -s    Seçtiğiniz sayfadaki popüler başlıkları getirir. (varsayılan: 1)` + "\n",
+		--kategori, -k	  Seçtiğiniz kategoriden popüler başlıkları listeler. (ilişkiler, spor, siyaset...)
+		--limit,    -l    Listelenecek maksimum başlık sayısı. (varsayılan: 20)` + `
+		--sayfa,    -s    Seçtiğiniz sayfadaki popüler başlıkları getirir. (varsayılan: 1)` + "\n",
 			OnUsageError: func(c *cli.Context, err error, isSubcommand bool) error {
 				cli.ShowCommandHelp(c, "gundem")
 				return nil

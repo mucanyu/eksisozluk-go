@@ -13,6 +13,13 @@ type Entry struct {
 	Date   string
 }
 
+// GundemParams fields
+type GundemParams struct {
+	Kategori string
+	Limit    int
+	Page     int
+}
+
 // BaslikParams fields
 type BaslikParams struct {
 	Topic  string

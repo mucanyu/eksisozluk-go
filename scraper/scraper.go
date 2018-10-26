@@ -16,7 +16,7 @@ import (
 
 var (
 	mainURL   = "https://www.eksisozluk.com/"
-	gundemURL = mainURL + "basliklar/gundem"
+	gundemURL = mainURL + "basliklar/"
 
 	grey        = color.New(color.FgBlack, color.FgWhite)
 	baslikColor = color.New(color.Bold, color.FgHiGreen)
@@ -57,8 +57,8 @@ func init() {
 }
 
 // PrintGundem prints popular topics
-func PrintGundem(limit, pageVal int) error {
-	t, err := popularTopics(limit, pageVal)
+func PrintGundem(params *model.GundemParams) error {
+	t, err := popularTopics(params)
 	if err != nil {
 		return err
 	}
@@ -72,13 +72,18 @@ func PrintGundem(limit, pageVal int) error {
 	return nil
 }
 
-// popularTopics scrapes the link and then
-// returns a []models.Topic which contains title, new entry count and ID.
-func popularTopics(lim, pageVal int) ([]model.Topic, error) {
+// popularTopics scrapes the link and then returns a
+// []models.Topic which contains title and new entry count
+func popularTopics(p *model.GundemParams) ([]model.Topic, error) {
 	topicList := make([]model.Topic, 0)
+	if len(p.Kategori) > 0 {
+		gundemURL += "kanal/" + p.Kategori
+	} else {
+		gundemURL += "gundem"
+	}
 
 	for {
-		resp, err := http.Get(gundemURL + "?p=" + strconv.Itoa(pageVal))
+		resp, err := http.Get(gundemURL + "?p=" + strconv.Itoa(p.Page))
 		if err != nil {
 			return nil, errors.New("ERROR: internet bağlantınızı kontrol edin")
 		}
@@ -93,19 +98,22 @@ func popularTopics(lim, pageVal int) ([]model.Topic, error) {
 		if len(topics) == 0 {
 			return nil, errors.New("ERROR: Lütfen parametre değerlerinizi kontrol edin")
 		}
+
 		for _, topic := range topics {
 			t := model.Topic{}
-
 			t.Title = scrape.Text(topic.FirstChild)
-			t.NewEntryCount = scrape.Text(topic.LastChild)
+
+			if topic.LastChild.DataAtom == atom.Small {
+				t.NewEntryCount = scrape.Text(topic.LastChild)
+			}
 
 			topicList = append(topicList, t)
 
-			if len(topicList) == lim {
+			if len(topicList) == p.Limit {
 				return topicList, nil
 			}
 		}
-		pageVal++
+		p.Page++
 	}
 }
 
