@@ -1,7 +1,7 @@
 <p align="center"><img src="https://image.ibb.co/buoQzz/Logo_T1.jpg" alt="Project Logo" width="300"></p>
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/mucanyu/eksisozluk-go)](https://goreportcard.com/report/github.com/mucanyu/eksisozluk-go)
-![GoDoc](https://godoc.org/github.com/mucanyu/eksisozluk-go?status.svg)
+[![GoDoc](https://godoc.org/github.com/mucanyu/eksisozluk-go?status.png)](https://godoc.org/github.com/mucanyu/eksisozluk-go)
 
 
 # eksisozluk-go 🌢
