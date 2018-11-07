@@ -32,8 +32,8 @@ KULLANIM:
 KOMUTLAR:
 			gundem,  g	 Ekşisözlük'teki gündemleri listeler
 			baslik,  b	 Başlık içerisindeki entryleri listeler
-			version, v 	 Versiyon numarasını gösterir
 			help,    h	 Kullanılabilen komutları listeler ya da bir komut için yardım yazısını gösterir
+			version  	 Versiyon numarasını gösterir
 `
 	app.Commands = []cli.Command{
 		cli.Command{
@@ -88,8 +88,9 @@ SECENEKLER:
 			},
 		},
 		cli.Command{
-			Name:  "baslik",
-			Usage: "Basliktaki entryleri listeler",
+			Name:    "baslik",
+			Aliases: []string{"b"},
+			Usage:   "Basliktaki entryleri listeler",
 			Flags: []cli.Flag{
 				cli.IntFlag{
 					Name:        "sayfa, s",
