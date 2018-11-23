@@ -5,7 +5,7 @@
 
 
 # eksisozluk-go 🌢
-Komut satırından `ek$isözlük` gündemini takip etmenizi ve başlık içerisindeki entryleri okumanızı sağlayan uygulama.
+Komut satırından `ek$isözlük` gündemini takip etmenizi ve başlık içerisindeki entryleri okumanızı sağlar.
 
 **Go** ile geliştirildi.
 
@@ -22,7 +22,7 @@ Komut satırından `ek$isözlük` gündemini takip etmenizi ve başlık içerisi
 #### -> Derlerim
 
 Gereklilikler:
-`Go 1.7 ve üzeri`
+`Go 1.6+`
 ```
 $ go get github.com/mucanyu/eksisozluk-go
 $ cd $GOPATH/src/github.com/mucanyu/eksisozluk-go
