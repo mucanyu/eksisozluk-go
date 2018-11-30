@@ -19,7 +19,7 @@ Komut satırından `ek$isözlük` gündemini takip etmenizi ve başlık içerisi
     $ chmod +x eksisozluk-go
     ```
 
-#### -> Derlerim
+#### -> Kurcalar/Derlerim
 
 Gereklilikler:
 `Go 1.6+`
