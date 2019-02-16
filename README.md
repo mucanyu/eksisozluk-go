@@ -7,8 +7,6 @@
 # eksisozluk-go 🌢
 Komut satırından `ek$isözlük` gündemini takip etmenizi ve başlık içerisindeki entryleri okumanızı sağlar.
 
-**Go** ile geliştirildi.
-
 ### Nasıl?
 
 #### -> Kullanırım
